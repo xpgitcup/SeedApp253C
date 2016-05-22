@@ -18,6 +18,11 @@ class UserLibController {
     @Transactional
     def doUploadUserLib(UserLibInstance userLibInstanceInstance) {
         
+        //ClassLoader parent = getClass().getClassLoader(); 
+        //GroovyClassLoader loader = new GroovyClassLoader(parent);   
+        //loader.clearCache() 
+        //def cs = loader.removeClassCacheEntry("cn.edu.cup.test.UserLib4TestDataA") 
+        
         def uc = UserLibConfig.findById(userLibInstanceInstance.libType.id)
         def webRootDir = commonService.getServletContext().getRealPath("/")
         params.destDir = "${webRootDir}/userLibs/${uc.path}"

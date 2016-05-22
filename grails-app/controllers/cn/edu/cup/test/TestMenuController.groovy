@@ -17,12 +17,6 @@ class TestMenuController {
         
         loader.addURL(file.toURL())
         
-        //def clazz = loader.parseClass(file)
-        
-        
-        //println "文件名：${fileName}"
-        //def engine = new GroovyScriptEngine(fileName)
-        
         def className = "cn.edu.cup.test.UserLib4TestDataA"
         
         def clazz = loader.loadClass(className)
