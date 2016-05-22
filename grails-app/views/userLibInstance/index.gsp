@@ -24,15 +24,17 @@
 			<thead>
 					<tr>
 					
+						<g:sortableColumn property="name" title="${message(code: 'userLibInstance.name.label', default: 'Name')}" />
+					
 						<g:sortableColumn property="description" title="${message(code: 'userLibInstance.description.label', default: 'Description')}" />
+					
+						<g:sortableColumn property="fileName" title="${message(code: 'userLibInstance.fileName.label', default: 'File Name')}" />
 					
 						<g:sortableColumn property="developer" title="${message(code: 'userLibInstance.developer.label', default: 'Developer')}" />
 					
-						<th><g:message code="userLibInstance.libType.label" default="Lib Type" /></th>
-					
-						<g:sortableColumn property="name" title="${message(code: 'userLibInstance.name.label', default: 'Name')}" />
-					
 						<g:sortableColumn property="uploadDate" title="${message(code: 'userLibInstance.uploadDate.label', default: 'Upload Date')}" />
+					
+						<th><g:message code="userLibInstance.libType.label" default="Lib Type" /></th>
 					
 					</tr>
 				</thead>
@@ -40,15 +42,17 @@
 				<g:each in="${userLibInstanceInstanceList}" status="i" var="userLibInstanceInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${userLibInstanceInstance.id}">${fieldValue(bean: userLibInstanceInstance, field: "description")}</g:link></td>
+						<td><g:link action="show" id="${userLibInstanceInstance.id}">${fieldValue(bean: userLibInstanceInstance, field: "name")}</g:link></td>
+					
+						<td>${fieldValue(bean: userLibInstanceInstance, field: "description")}</td>
+					
+						<td>${fieldValue(bean: userLibInstanceInstance, field: "fileName")}</td>
 					
 						<td>${fieldValue(bean: userLibInstanceInstance, field: "developer")}</td>
 					
+						<td>${fieldValue(bean: userLibInstanceInstance, field: "uploadDate")}</td>
+					
 						<td>${fieldValue(bean: userLibInstanceInstance, field: "libType")}</td>
-					
-						<td>${fieldValue(bean: userLibInstanceInstance, field: "name")}</td>
-					
-						<td><g:formatDate date="${userLibInstanceInstance.uploadDate}" /></td>
 					
 					</tr>
 				</g:each>

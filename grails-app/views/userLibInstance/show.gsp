@@ -23,11 +23,29 @@
 			</g:if>
 			<ol class="property-list userLibInstance">
 			
+				<g:if test="${userLibInstanceInstance?.name}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="userLibInstance.name.label" default="Name" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userLibInstanceInstance}" field="name"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${userLibInstanceInstance?.description}">
 				<li class="fieldcontain">
 					<span id="description-label" class="property-label"><g:message code="userLibInstance.description.label" default="Description" /></span>
 					
 						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${userLibInstanceInstance}" field="description"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userLibInstanceInstance?.fileName}">
+				<li class="fieldcontain">
+					<span id="fileName-label" class="property-label"><g:message code="userLibInstance.fileName.label" default="File Name" /></span>
+					
+						<span class="property-value" aria-labelledby="fileName-label"><g:fieldValue bean="${userLibInstanceInstance}" field="fileName"/></span>
 					
 				</li>
 				</g:if>
@@ -41,29 +59,20 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${userLibInstanceInstance?.uploadDate}">
+				<li class="fieldcontain">
+					<span id="uploadDate-label" class="property-label"><g:message code="userLibInstance.uploadDate.label" default="Upload Date" /></span>
+					
+						<span class="property-value" aria-labelledby="uploadDate-label"><g:fieldValue bean="${userLibInstanceInstance}" field="uploadDate"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${userLibInstanceInstance?.libType}">
 				<li class="fieldcontain">
 					<span id="libType-label" class="property-label"><g:message code="userLibInstance.libType.label" default="Lib Type" /></span>
 					
 						<span class="property-value" aria-labelledby="libType-label"><g:link controller="userLibConfig" action="show" id="${userLibInstanceInstance?.libType?.id}">${userLibInstanceInstance?.libType?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userLibInstanceInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="userLibInstance.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userLibInstanceInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userLibInstanceInstance?.uploadDate}">
-				<li class="fieldcontain">
-					<span id="uploadDate-label" class="property-label"><g:message code="userLibInstance.uploadDate.label" default="Upload Date" /></span>
-					
-						<span class="property-value" aria-labelledby="uploadDate-label"><g:formatDate date="${userLibInstanceInstance?.uploadDate}" /></span>
 					
 				</li>
 				</g:if>
