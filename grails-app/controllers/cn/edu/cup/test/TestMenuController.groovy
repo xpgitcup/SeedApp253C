@@ -13,21 +13,32 @@ class TestMenuController {
         ClassLoader parent = getClass().getClassLoader(); 
         GroovyClassLoader loader = new GroovyClassLoader(parent);   
         
-        println "${parent}"
-        println "${loader}"
+        def file = new File(userLib.fileName)
         
-        println "文件名：${fileName}"
-        def engine = new GroovyScriptEngine(fileName)
+        loader.addURL(file.toURL())
         
-        def className = "testuserlib.TestUserLib"
-        def clazz = engine.loadScriptByName(className)
-        def instance = clazz.newInstance()
+        //def clazz = loader.parseClass(file)
+        
+        
+        //println "文件名：${fileName}"
+        //def engine = new GroovyScriptEngine(fileName)
+        
+        def className = "cn.edu.cup.test.UserLib4TestDataA"
+        
+        def clazz = loader.loadClass(className)
         println "${clazz}"
-        //def clazz = loader.loadClass(fileName)
         
-        println "${clazz}"
+        def classes = loader.loadedClasses
+        classes.each() {e->
+            println "测试： ${e}"
+        }
         
-        return [fileName: fileName, value: 100];
+        def object = clazz.newInstance()
+        
+        def aa = TestDataA.get(a.id)
+        def value = object.invokeMethod("calculator", aa)
+        
+        return [fileName: fileName, value: value];
     }
     
     def testUserLib(Integer max) {
