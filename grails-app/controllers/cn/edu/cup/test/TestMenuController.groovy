@@ -16,7 +16,14 @@ class TestMenuController {
         println "${parent}"
         println "${loader}"
         
-        def clazz = loader.loadClass(fileName)
+        println "文件名：${fileName}"
+        def engine = new GroovyScriptEngine(fileName)
+        
+        def className = "testuserlib.TestUserLib"
+        def clazz = engine.loadScriptByName(className)
+        def instance = clazz.newInstance()
+        println "${clazz}"
+        //def clazz = loader.loadClass(fileName)
         
         println "${clazz}"
         
