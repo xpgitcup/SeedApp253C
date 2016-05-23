@@ -22,10 +22,12 @@ class TestMenuController {
         def clazz = loader.loadClass(className)
         println "${clazz}"
         
-        def classes = loader.loadedClasses
-        classes.each() {e->
+        def cs = loader.getLoadedClasses();
+        println "类？？${cs}"
+        cs.each() {e->
             println "测试： ${e}"
         }
+        
         
         def object = clazz.newInstance()
         
