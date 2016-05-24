@@ -13,7 +13,7 @@ class TestMenuController {
         ClassLoader parent = getClass().getClassLoader(); 
         GroovyClassLoader loader = new GroovyClassLoader(parent);   
         
-        def file = new File(userLib.fileName)
+        def file = new File(userLib.realFileName())
         
         loader.addURL(file.toURL())
         

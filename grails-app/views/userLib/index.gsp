@@ -44,7 +44,7 @@
                             <td><g:link action="show" id="${userLibInstanceInstance.id}">${fieldValue(bean: userLibInstanceInstance, field: "name")}</g:link></td>
                             <td>${fieldValue(bean: userLibInstanceInstance, field: "description")}</td>
                             <td>${fieldValue(bean: userLibInstanceInstance, field: "fileName")}</td>
-                            <td>${status[i]}</td>
+                            <td>${userLibInstanceInstance.status()}</td>
 
                         </tr>
                     </g:each>

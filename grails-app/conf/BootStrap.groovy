@@ -14,6 +14,7 @@ class BootStrap {
                 configureForDevelopment(servletContext);
             }
             production {
+                initService.processTasks()
             }
         }
     }
@@ -39,6 +40,8 @@ class BootStrap {
         def scriptPathUser = "${webRootDir}scripts/user"
         println "初始化 ${scriptPathUser}"
         initService.loadScripts(scriptPathUser)
+        //处理任务
+        initService.processTasks()
     }
     
     /*

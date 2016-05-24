@@ -1,11 +1,37 @@
 package cn.edu.cup.system
 
+import cn.edu.cup.process.ProcessTask
+import cn.edu.cup.process.StandTask
 import grails.transaction.Transactional
 
 @Transactional
 class InitService {
     
     def dataSource
+
+    def processTasks() {
+        println "开始处理："
+        def tasks = ProcessTask.findAllByStatus(false)
+        tasks.each() {e->
+            taskExecute(e)
+            println "处理${e}..."
+        }
+    }
+    
+    def taskExecute(ProcessTask task) {
+        switch (task.name.name) {
+        case "更新":
+            def file = new File(task.paramsString)
+            if (file.exists()) {
+                def ok = file.delete()
+                task.status = ok
+                task.save()
+            }
+            break;
+        default:
+            println "不认识的任务：${task}"
+        }
+    }
     
     //加载数据库初始化脚本
     def loadScripts(String dir) {

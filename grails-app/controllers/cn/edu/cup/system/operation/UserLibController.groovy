@@ -18,21 +18,24 @@ class UserLibController {
     @Transactional
     def doUploadUserLib(UserLibInstance userLibInstanceInstance) {
         
-        //ClassLoader parent = getClass().getClassLoader(); 
-        //GroovyClassLoader loader = new GroovyClassLoader(parent);   
-        //loader.clearCache() 
-        //def cs = loader.removeClassCacheEntry("cn.edu.cup.test.UserLib4TestDataA") 
-        
-        def uc = UserLibConfig.findById(userLibInstanceInstance.libType.id)
-        def webRootDir = commonService.getServletContext().getRealPath("/")
-        params.destDir = "${webRootDir}/userLibs/${uc.path}"
-        def destFile = commonService.upload(params)
-        println "${destFile}"
+        def nfileName = params.uploadedFile.originalFilename
+        println "准备上传：${nfileName}"
 
-        userLibInstanceInstance.fileName = destFile
-        userLibInstanceInstance.save(flush:true)
+        params.destDir = userLibInstanceInstance.realPath()
         
-        redirect(action:"index")
+        def cfile = new File("${userLibInstanceInstance.realPath()}/${nfileName}")
+        if (cfile.exists()) {
+            flash.message = "${nfileName}已经存在了！"
+            redirect(action: "prepareUploadUserLib")
+        } else {
+            def destFile = commonService.upload(params)
+            println "${destFile}"
+
+            userLibInstanceInstance.fileName = nfileName
+            userLibInstanceInstance.save(flush:true)
+        
+            redirect(action:"index")
+        }
     }
     
     def prepareUploadUserLib() {
@@ -42,13 +45,13 @@ class UserLibController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def theList = UserLibInstance.list(params)
-        def status = []
-        theList.each() {e->
-            status.add(checkStatus(e.fileName))
-        }
+        //def status = []
+        //theList.each() {e->
+        //    status.add(checkStatus(e.fileName))
+        //}
         model:[
             userLibInstanceInstanceList: theList,
-            status: status,
+            //status: status,
             userLibInstanceInstanceCount: UserLibInstance.count()
         ]
     }

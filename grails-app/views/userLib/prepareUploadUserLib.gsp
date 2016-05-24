@@ -15,6 +15,9 @@
     </head>
     <body>
         <div id="list-userLibInstance" class="content scaffold-list" role="main">
+            <g:if test="${flash.message}">
+                <div class="message" role="status">${flash.message}</div>
+            </g:if>
             <g:uploadForm controller="userLib" action="doUploadUserLib">
                 <fieldset class="form">
                     <g:render template="form"/>

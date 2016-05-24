@@ -10,24 +10,23 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2016-05-24 16:55:05
+Date: 2016-05-24 17:10:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
--- Table structure for `user_lib_config`
+-- Table structure for `stand_task`
 -- ----------------------------
-DROP TABLE IF EXISTS `user_lib_config`;
-CREATE TABLE `user_lib_config` (
+DROP TABLE IF EXISTS `stand_task`;
+CREATE TABLE `stand_task` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `version` bigint(20) NOT NULL,
-  `description` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `path` varchar(255) NOT NULL,
+  `params_description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of user_lib_config
+-- Records of stand_task
 -- ----------------------------
-INSERT INTO `user_lib_config` VALUES ('1', '0', '测试性的模块', '基本算术', 'suanshu');
+INSERT INTO `stand_task` VALUES ('1', '0', '更新', '文件名');
