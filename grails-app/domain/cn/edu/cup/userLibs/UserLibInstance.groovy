@@ -1,6 +1,8 @@
 package cn.edu.cup.userLibs
 
 import java.util.Formatter.DateTime
+import java.util.jar.JarFile
+import java.util.jar.Manifest
 
 class UserLibInstance {
 
@@ -24,6 +26,18 @@ class UserLibInstance {
     
     String toString() {
         return "${name}/${description}"
+    }
+    
+    def check() {
+        ClassLoader parent = getClass().getClassLoader(); 
+        GroovyClassLoader loader = new GroovyClassLoader(parent);   
+        def file = new File(realFileName())
+        JarFile jf = new JarFile(file)
+        def es = jf.entries()
+        es.each() {e->
+            println "${e}"
+            
+        }
     }
     
     String realPath() {

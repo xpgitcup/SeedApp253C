@@ -34,6 +34,10 @@ class UserLibController {
             userLibInstanceInstance.fileName = nfileName
             userLibInstanceInstance.save(flush:true)
         
+            println "上传成功......"
+            
+            userLibInstanceInstance.check()
+            
             redirect(action:"index")
         }
     }
