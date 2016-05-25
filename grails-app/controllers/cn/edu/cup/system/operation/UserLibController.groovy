@@ -3,6 +3,7 @@ package cn.edu.cup.system.operation
 import static org.springframework.http.HttpStatus.*
 import cn.edu.cup.userLibs.UserLibInstance
 import cn.edu.cup.userLibs.UserLibConfig
+import cn.edu.cup.userLibs.UserClassInstance
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -24,22 +25,37 @@ class UserLibController {
         params.destDir = userLibInstanceInstance.realPath()
         
         def cfile = new File("${userLibInstanceInstance.realPath()}/${nfileName}")
+        /*
         if (cfile.exists()) {
-            flash.message = "${nfileName}已经存在了！"
-            redirect(action: "prepareUploadUserLib")
+        flash.message = "${nfileName}已经存在了！"
+        redirect(action: "prepareUploadUserLib")
         } else {
-            def destFile = commonService.upload(params)
-            println "${destFile}"
-
-            userLibInstanceInstance.fileName = nfileName
-            userLibInstanceInstance.save(flush:true)
-        
-            println "上传成功......"
-            
-            userLibInstanceInstance.check()
-            
-            redirect(action:"index")
+        def destFile = commonService.upload(params)
+        println "${destFile}"
+        userLibInstanceInstance.fileName = nfileName
+        userLibInstanceInstance.save(flush:true)
+        println "上传成功......"
+        userLibInstanceInstance.getEntries()
+        redirect(action:"index")
+        }*/
+        def destFile = commonService.upload(params)
+        println "${destFile}"
+        userLibInstanceInstance.fileName = nfileName
+        userLibInstanceInstance.save(flush:true)
+        println "上传成功......"
+        def clnames = userLibInstanceInstance.getEntries()
+        clnames.each() {e->
+            if (e.contains('.class')) {
+                println "?? ${e}"
+                def k = e.lastIndexOf('/')
+                def cn = e.substring(k+1)
+                println "c: ${cn}"
+                def nc = new UserClassInstance(name: cn, lib: userLibInstanceInstance)
+                nc.save(flush: true)
+            }
         }
+        redirect(action:"index")
+        
     }
     
     def prepareUploadUserLib() {

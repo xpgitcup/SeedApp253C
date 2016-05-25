@@ -16,6 +16,8 @@ class UserLibInstance {
     
     static belongsTo = [libType: UserLibConfig]
     
+    static hasMany = [classes: UserClassInstance]
+    
     static constraints = {
         name()
         description()
@@ -28,16 +30,18 @@ class UserLibInstance {
         return "${name}/${description}"
     }
     
-    def check() {
+    def getEntries() {
         ClassLoader parent = getClass().getClassLoader(); 
         GroovyClassLoader loader = new GroovyClassLoader(parent);   
         def file = new File(realFileName())
         JarFile jf = new JarFile(file)
+        def ens = []
         def es = jf.entries()
         es.each() {e->
             println "${e}"
-            
+            ens.add("${e}")
         }
+        return ens
     }
     
     String realPath() {
