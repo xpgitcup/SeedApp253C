@@ -31,8 +31,6 @@ class UserLibInstance {
     }
     
     def getEntries() {
-        ClassLoader parent = getClass().getClassLoader(); 
-        GroovyClassLoader loader = new GroovyClassLoader(parent);   
         def file = new File(realFileName())
         JarFile jf = new JarFile(file)
         def ens = []
