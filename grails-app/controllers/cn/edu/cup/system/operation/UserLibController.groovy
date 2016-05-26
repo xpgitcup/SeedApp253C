@@ -4,6 +4,7 @@ import static org.springframework.http.HttpStatus.*
 import cn.edu.cup.userLibs.UserLibInstance
 import cn.edu.cup.userLibs.UserLibConfig
 import cn.edu.cup.userLibs.UserClassInstance
+import cn.edu.cup.userLibs.UserMethodInstance
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
@@ -47,11 +48,19 @@ class UserLibController {
         clnames.each() {e->
             if (e.contains('.class')) {
                 println "?? ${e}"
-                def k = e.lastIndexOf('/')
-                def cn = e.substring(k+1)
+                def k = e.lastIndexOf('.class')
+                def cn = e.substring(0, k).replace('/', '.') //e.substring(k+1)
                 println "c: ${cn}"
                 def nc = new UserClassInstance(name: cn, lib: userLibInstanceInstance)
                 nc.save(flush: true)
+                
+                def object = nc.classInstance()
+                def ms = object.class.getDeclaredMethods()
+                ms.each() {ee->
+                    def nm = new UserMethodInstance(name: ee.name, clazz: nc)
+                    nm.save(flush: true)
+                    println "method ${ee}"
+                }
             }
         }
         redirect(action:"index")
