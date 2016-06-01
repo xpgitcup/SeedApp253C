@@ -11,6 +11,24 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: userClassInstanceInstance, field: 'methods', 'error')} ">
+	<label for="methods">
+		<g:message code="userClassInstance.methods.label" default="Methods" />
+		
+	</label>
+	
+<ul class="one-to-many">
+<g:each in="${userClassInstanceInstance?.methods?}" var="m">
+    <li><g:link controller="userMethodInstance" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+</g:each>
+<li class="add">
+<g:link controller="userMethodInstance" action="create" params="['userClassInstance.id': userClassInstanceInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'userMethodInstance.label', default: 'UserMethodInstance')])}</g:link>
+</li>
+</ul>
+
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: userClassInstanceInstance, field: 'name', 'error')} required">
 	<label for="name">
 		<g:message code="userClassInstance.name.label" default="Name" />

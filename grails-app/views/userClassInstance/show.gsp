@@ -32,6 +32,17 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${userClassInstanceInstance?.methods}">
+				<li class="fieldcontain">
+					<span id="methods-label" class="property-label"><g:message code="userClassInstance.methods.label" default="Methods" /></span>
+					
+						<g:each in="${userClassInstanceInstance.methods}" var="m">
+						<span class="property-value" aria-labelledby="methods-label"><g:link controller="userMethodInstance" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${userClassInstanceInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="userClassInstance.name.label" default="Name" /></span>

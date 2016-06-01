@@ -55,7 +55,9 @@ class UserLibController {
                 nc.save(flush: true)
                 
                 def object = nc.classInstance()
-                def ms = object.class.getDeclaredMethods()
+                //def ms = object.class.getDeclaredMethods()
+                //def ms = object.class.getMethods()
+                def ms = nc.classInstanceMethods()
                 ms.each() {ee->
                     def nm = new UserMethodInstance(name: ee.name, clazz: nc)
                     nm.save(flush: true)
