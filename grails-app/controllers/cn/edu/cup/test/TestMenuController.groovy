@@ -34,6 +34,13 @@ class TestMenuController {
         def aa = TestDataA.get(a.id)
         def value = object.invokeMethod("calculator", aa)
         
+        def ms = object.class.getDeclaredMethods()
+        ms.each() {e->
+            println "......${e}"
+        }
+        
+        object = null
+        
         return [fileName: fileName, value: value];
     }
     
